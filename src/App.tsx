@@ -4,6 +4,8 @@ import fields from "../fields.json"
 
 function App() {
   return (
+    <div className="container">
+    <h1>Comand Link Form</h1>
     <form className="container">
       {fields.map((field, index) => {
         if (Array.isArray(field)) {
@@ -20,6 +22,7 @@ function App() {
       })}
       <button type="submit">Submit</button>
     </form>
+    </div>
   );
 }
 

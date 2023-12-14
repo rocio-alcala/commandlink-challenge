@@ -1,4 +1,5 @@
 import { Field } from "../types";
+import "./Input.css";
 
 interface InputProps {
   field: Field;
@@ -7,16 +8,21 @@ interface InputProps {
 export default function Input({ field }: InputProps) {
   return (
     <div className="inputcontainer">
-      <label htmlFor={field.id}>{field.id} </label>
+      <label className="input-label" htmlFor={field.id}>{field.id} </label>
       {field.type !== "select" ? (
         <input
+          className="input-field"
           id={field.id}
           type={field.type}
           required={field.required ? true : false}
           placeholder={field.placeholder && field.placeholder}
         ></input>
       ) : (
-        <select id={field.id} defaultValue={field.placeholder}>
+        <select
+          className="input-field"
+          id={field.id}
+          defaultValue={field.placeholder}
+        >
           <option value={field.placeholder} disabled>
             {field.placeholder}
           </option>

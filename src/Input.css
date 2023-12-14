@@ -1,0 +1,13 @@
+.input-field {
+    width: 200px;
+    padding: 5px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+
+  .input-label {
+    font-size: 16px;
+    color: #777;
+  }

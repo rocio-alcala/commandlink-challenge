@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap
+}
+
+.inputcontainer {
+  padding: 1rem;
+  width: auto;
+}
+
+.rowcontainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+justify-content: center;
+}
+
+button {
+  padding: 10px;
+  margin: 20px ;
+  font-size: 16px;
+  text-align: center;
+  background-color: #7e7f80;
+  color: #fff;
+  border: 1px solid #77797b;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .rowcontainer {
+    flex-direction: column;
+  }
+}
