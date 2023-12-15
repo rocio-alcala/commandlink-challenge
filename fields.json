@@ -14,7 +14,7 @@
       }]
     ,
     {
-      "id": "Email",
+      "id": "email",
       "required": true,
       "type": "text"
     },
