@@ -17,7 +17,12 @@ const validationObjet: {
 fields.flat().forEach((field: Field) => {
   let validationField: yup.StringSchema<string, yup.AnyObject, undefined, "">;
   if (field.id === "email") {
-    validationField = yup.string().email();
+    validationField = yup.string().email() as yup.StringSchema<
+      string,
+      yup.AnyObject,
+      undefined,
+      ""
+    >;
     if (field.required) {
       validationField = validationField.required();
     }
@@ -25,7 +30,10 @@ fields.flat().forEach((field: Field) => {
   } else if (field.id === "phone") {
     validationField = yup
       .string()
-      .matches(/^[0-9]{10}$/, "The phone number must be 10 numeric digits");
+      .matches(
+        /^[0-9]{10}$/,
+        "The phone number must be 10 numeric digits"
+      ) as yup.StringSchema<string, yup.AnyObject, undefined, "">;
     if (field.required) {
       validationField = validationField.required();
     }
@@ -78,7 +86,12 @@ function App() {
                 );
               } else {
                 return (
-                  <Input errors={errors} register={register} field={field} key={index}></Input>
+                  <Input
+                    errors={errors}
+                    register={register}
+                    field={field}
+                    key={index}
+                  ></Input>
                 );
               }
             })}
