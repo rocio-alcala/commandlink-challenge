@@ -48,7 +48,6 @@ function App() {
   });
   const [isSubmited, setIsSubmited] = useState(false);
   const dispatch = useAppDispatch();
-  console.log("@erros", errors);
 
   return (
     <div className="container">
@@ -64,7 +63,7 @@ function App() {
             {fields.map((field, index) => {
               if (Array.isArray(field)) {
                 return (
-                  <div className="rowcontainer">
+                  <div key={index} className="rowcontainer">
                     {field.map((columField, index) => {
                       return (
                         <Input
