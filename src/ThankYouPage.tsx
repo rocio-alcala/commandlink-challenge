@@ -7,15 +7,17 @@ export default function ThankYouPage() {
 
   return (
     <>
-      <h1 className="container">
+    <div className="displaydatacontainer">
+<h1 className="title">Thank you for submited your information!!</h1>
+      <div className="datainputcontainer">
         {fields.map((field, index) => {
           if (Array.isArray(field)) {
             return (
-              <div key={index} className="rowcontainer">
+              <div key={index} className="datainputrowcontainer">
                 {field.map((columField, index) => {
                   if (storeForm[columField.id])
                     return (
-                      <div className="inputs" key={index}>
+                      <div className="datainput" key={index}>
                         {storeForm[columField.id]}
                       </div>
                     );
@@ -24,10 +26,11 @@ export default function ThankYouPage() {
             );
           } else {
             if (storeForm[field.id])
-              return <div  className="inputs" key={index}>{storeForm[field.id]}</div>;
+              return <div  className="datainput" key={index}>{storeForm[field.id]}</div>;
           }
         })}
-      </h1>
+      </div>
+      </div>
     </>
   );
 }

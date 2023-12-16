@@ -17,7 +17,7 @@ export default function Input({ field, register, errors }: InputProps) {
       <label className="input-label" htmlFor={field.id}>
         {capitalizeString(field.id)}
       </label>
-      {field.type !== "select" ? (
+      {field.type == "text" ? (
         <input
           {...register(`${field.id}`)}
           className="input-field"
@@ -25,7 +25,7 @@ export default function Input({ field, register, errors }: InputProps) {
           type={field.type}
           placeholder={field.placeholder && field.placeholder}
         ></input>
-      ) : (
+      ) : field.type === "select" ? (
         <select
           {...register(`${field.id}`)}
           className="input-field"
@@ -41,8 +41,18 @@ export default function Input({ field, register, errors }: InputProps) {
             </option>
           ))}
         </select>
-      )}
-      {errors[field.id] ? <p>{errors[field.id]?.message}</p> : null}
+      ) : field.type === "textarea" ? (
+        <textarea
+          {...register(`${field.id}`)}
+          className="input-field"
+          id={field.id}
+          placeholder={field.placeholder && field.placeholder}
+        ></textarea>
+      ) : null}
+      {errors[field.id] ? (
+        <p className="error">{errors[field.id]?.message}</p>
+      ) : null}
     </div>
   );
 }
+

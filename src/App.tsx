@@ -9,6 +9,7 @@ import ThankYouPage from "./ThankYouPage";
 import * as yup from "yup";
 import { Field } from "../types";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { capitalizeString } from "../helpers";
 
 const validationObjet: {
   [key: string]: yup.StringSchema<string, yup.AnyObject, undefined, "">;
@@ -17,14 +18,14 @@ const validationObjet: {
 fields.flat().forEach((field: Field) => {
   let validationField: yup.StringSchema<string, yup.AnyObject, undefined, "">;
   if (field.id === "email") {
-    validationField = yup.string().email() as yup.StringSchema<
+    validationField = yup.string().email(`${capitalizeString(field.id)} must be a valid email`) as yup.StringSchema<
       string,
       yup.AnyObject,
       undefined,
       ""
     >;
     if (field.required) {
-      validationField = validationField.required();
+      validationField = validationField.required(`${capitalizeString(field.id)} is required`);
     }
     validationObjet[field.id] = validationField;
   } else if (field.id === "phone") {
@@ -35,11 +36,11 @@ fields.flat().forEach((field: Field) => {
         "The phone number must be 10 numeric digits"
       ) as yup.StringSchema<string, yup.AnyObject, undefined, "">;
     if (field.required) {
-      validationField = validationField.required();
+      validationField = validationField.required(`${capitalizeString(field.id)} is required`);
     }
     validationObjet[field.id] = validationField;
   } else if (field.required) {
-    validationField = yup.string().required();
+    validationField = yup.string().required(`${capitalizeString(field.id)} is required`);
     validationObjet[field.id] = validationField;
   }
 });
@@ -58,50 +59,54 @@ function App() {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="container">
-      {!isSubmited ? (
-        <>
-          <h1>Command Link Form</h1>
-          <form
-            className="container"
-            onSubmit={handleSubmit((formValues) => {
-              dispatch(submitForm(formValues)), setIsSubmited(true);
-            })}
-          >
-            {fields.map((field, index) => {
-              if (Array.isArray(field)) {
-                return (
-                  <div key={index} className="rowcontainer">
-                    {field.map((columField, index) => {
-                      return (
-                        <Input
-                          errors={errors}
-                          register={register}
-                          field={columField}
-                          key={index}
-                        ></Input>
-                      );
-                    })}
-                  </div>
-                );
-              } else {
-                return (
-                  <Input
-                    errors={errors}
-                    register={register}
-                    field={field}
-                    key={index}
-                  ></Input>
-                );
-              }
-            })}
-            <button type="submit">Submit</button>
-          </form>
-        </>
-      ) : (
-        <ThankYouPage />
-      )}
-    </div>
+    <>
+    <body>
+      <nav>COMMAND LINK FORM</nav>
+      <div className="container">
+        {!isSubmited ? (
+          <>
+            <form
+              className="formcontainer"
+              onSubmit={handleSubmit((formValues) => {
+                dispatch(submitForm(formValues)), setIsSubmited(true);
+              })}
+            >
+              {fields.map((field, index) => {
+                if (Array.isArray(field)) {
+                  return (
+                    <div key={index} className="rowcontainer">
+                      {field.map((columField, index) => {
+                        return (
+                          <Input
+                            errors={errors}
+                            register={register}
+                            field={columField}
+                            key={index}
+                          ></Input>
+                        );
+                      })}
+                    </div>
+                  );
+                } else {
+                  return (
+                    <Input
+                      errors={errors}
+                      register={register}
+                      field={field}
+                      key={index}
+                    ></Input>
+                  );
+                }
+              })}
+              <button type="submit">Submit</button>
+            </form>
+          </>
+        ) : (
+          <ThankYouPage />
+        )}
+      </div>
+    </body>
+    </>
   );
 }
 

@@ -1,1 +1,44 @@
-.inputs {}
+.datainputrowcontainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.datainputcontainer {
+  font-size: 30px;
+  padding: 40px;
+  font-family: "Gill Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  min-height: 400px;
+}
+
+.datainput {
+  padding: 10px;
+}
+
+.displaydatacontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  margin: 100px;
+}
+
+.title {
+  text-align: center;
+}
+
+@media screen and (max-width: 400px) {
+  .datainputcontainer {
+    font-size: 20px;
+    height: 300px;
+  }
+  .title {
+    font-size: 30px;
+  }
+}

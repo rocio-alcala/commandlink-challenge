@@ -1,8 +1,24 @@
-.container {
+
+nav {
+  font-family: "Gill Sans", sans-serif;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  background-color: black;
+  padding: 2rem;
+  color: white;
+  font-weight: bolder;
+  font-size: 30px;
+}
+
+.formcontainer {
+  padding: 10px;
+  margin: 30px;
+  font-family: "Gill Sans", sans-serif;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  flex-wrap: wrap
+  align-items: start;
+  flex-wrap: wrap;
 }
 
 .inputcontainer {
@@ -14,23 +30,22 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-justify-content: center;
+  justify-content: start;
 }
 
 button {
+  width: 250px;
   padding: 10px;
-  margin: 20px ;
+  margin: 20px;
   font-size: 16px;
   text-align: center;
-  background-color: #7e7f80;
+  background-color: #e6472b;
   color: #fff;
-  border: 1px solid #77797b;
+  border: 1px solid #d44127;
   border-radius: 5px;
   cursor: pointer;
 }
 
-@media screen and (max-width: 400px) {
-  .rowcontainer {
-    flex-direction: column;
-  }
+button:hover {
+  background-color: #c23c25;
 }
