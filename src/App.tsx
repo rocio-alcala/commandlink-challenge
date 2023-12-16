@@ -26,10 +26,12 @@ function getValidationSchema(field: Field) {
 
 function getValidationObject(fields: Field[]) {
   const entries = fields.map((field) => {
-    const validationSchema = getValidationSchema(field);
+    let validationSchema = getValidationSchema(field);
 
     if (field.required) {
-      validationSchema.required(`${field.label || field.id} is required`);
+      validationSchema = validationSchema.required(
+        `${field.label || field.id} is required`
+      );
     }
 
     return [field.id, validationSchema];
@@ -59,6 +61,7 @@ function App() {
       <div className="container">
         {!isSubmitSuccessful ? (
           <form
+            noValidate
             className="formcontainer"
             onSubmit={handleSubmit((formValues) =>
               dispatch(submitForm(formValues))
