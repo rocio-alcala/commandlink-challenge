@@ -1,13 +1,11 @@
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import { Field } from "../types";
 import "./Input.css";
+
 interface InputProps {
   field: Field;
   register: UseFormRegister<FieldValues>;
-  errors: FieldErrors<{
-    [x: string]: string;
-    [x: number]: string;
-  }>;
+  errors: FieldErrors<Record<string, string>>;
 }
 
 export default function Input({ field, register, errors }: InputProps) {
@@ -16,7 +14,9 @@ export default function Input({ field, register, errors }: InputProps) {
       <label className="input-label" htmlFor={field.id}>
         {field.label || field.id}
       </label>
-      {field.type === "text" || field.type === "phone" || field.type === "email" ? (
+      {field.type === "text" ||
+      field.type === "phone" ||
+      field.type === "email" ? (
         <input
           {...register(`${field.id}`)}
           className="input-field"
@@ -54,4 +54,3 @@ export default function Input({ field, register, errors }: InputProps) {
     </div>
   );
 }
-

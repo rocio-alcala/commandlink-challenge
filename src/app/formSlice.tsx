@@ -1,29 +1,16 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import fields from "../../fields.json";
-import { Field } from "../../types";
 
-interface InitialState {
-  [key: string]: number | string | undefined;
+interface FormState {
+  [key: string]: string | undefined;
 }
-const initialState: InitialState = {};
-
-fields.flat().forEach((field: Field) => {
-  if (field.type === "number") {
-    initialState[field.id] = undefined;
-  } else {
-    initialState[field.id] = "";
-  }
-});
+const initialState: FormState = {};
 
 export const formSlice = createSlice({
   name: "form",
-  initialState: initialState,
+  initialState,
   reducers: {
-    submitForm: (state, action: PayloadAction<InitialState>) => {
-      return {
-        ...state,
-        ...action.payload,
-      };
+    submitForm: (_, action: PayloadAction<FormState>) => {
+      return action.payload;
     },
   },
 });
