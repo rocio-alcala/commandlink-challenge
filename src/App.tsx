@@ -11,11 +11,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 function getValidationSchema(field: Field) {
   switch (field.type) {
-    case 'phone':
+    case "phone":
       return yup
         .string()
         .matches(/^[0-9]{10}$/, "The phone number must be 10 numeric digits");
-    case 'email':
+    case "email":
       return yup
         .string()
         .email(`${field.label || field.id} must be a valid email`);
@@ -46,7 +46,7 @@ function App() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitted },
+    formState: { errors, isSubmitSuccessful },
   } = useForm({
     resolver: yupResolver(formValidationSchema),
   });
@@ -57,44 +57,42 @@ function App() {
     <>
       <nav>COMMAND LINK FORM</nav>
       <div className="container">
-        {!isSubmitted ? (
-          <>
-            <form
-              className="formcontainer"
-              onSubmit={handleSubmit((formValues) => {
-                dispatch(submitForm(formValues));
-              })}
-            >
-              {fields.map((field, index) => {
-                if (Array.isArray(field)) {
-                  return (
-                    <div key={index} className="rowcontainer">
-                      {field.map((columField, index) => {
-                        return (
-                          <Input
-                            errors={errors}
-                            register={register}
-                            field={columField}
-                            key={index}
-                          ></Input>
-                        );
-                      })}
-                    </div>
-                  );
-                } else {
-                  return (
-                    <Input
-                      errors={errors}
-                      register={register}
-                      field={field}
-                      key={index}
-                    ></Input>
-                  );
-                }
-              })}
-              <button type="submit">Submit</button>
-            </form>
-          </>
+        {!isSubmitSuccessful ? (
+          <form
+            className="formcontainer"
+            onSubmit={handleSubmit((formValues) =>
+              dispatch(submitForm(formValues))
+            )}
+          >
+            {fields.map((field, index) => {
+              if (Array.isArray(field)) {
+                return (
+                  <div key={index} className="rowcontainer">
+                    {field.map((columField, index) => {
+                      return (
+                        <Input
+                          errors={errors}
+                          register={register}
+                          field={columField}
+                          key={index}
+                        />
+                      );
+                    })}
+                  </div>
+                );
+              } else {
+                return (
+                  <Input
+                    errors={errors}
+                    register={register}
+                    field={field}
+                    key={index}
+                  />
+                );
+              }
+            })}
+            <button type="submit">Submit</button>
+          </form>
         ) : (
           <ThankYouPage />
         )}

@@ -9,48 +9,69 @@ interface InputProps {
 }
 
 export default function Input({ field, register, errors }: InputProps) {
-  return (
-    <div className="inputcontainer">
-      <label className="input-label" htmlFor={field.id}>
-        {field.label || field.id}
-      </label>
-      {field.type === "text" ||
-      field.type === "phone" ||
-      field.type === "email" ? (
-        <input
-          {...register(`${field.id}`)}
-          className="input-field"
-          id={field.id}
-          type={field.type}
-          placeholder={field.placeholder && field.placeholder}
-        ></input>
-      ) : field.type === "select" ? (
-        <select
-          {...register(`${field.id}`)}
-          className="input-field"
-          id={field.id}
-          defaultValue=""
-        >
-          <option value="" disabled>
-            {field.placeholder}
-          </option>
-          {field.options?.map((selectOption, index) => (
-            <option key={index} value={selectOption}>
-              {selectOption}
+  switch (field.type) {
+    case "select":
+      return (
+        <div className="inputcontainer">
+          <label className="input-label" htmlFor={field.id}>
+            {field.label || field.id}
+          </label>
+          <select
+            {...register(field.id)}
+            className="input-field"
+            id={field.id}
+            defaultValue=""
+          >
+            <option value="" disabled>
+              {field.placeholder}
             </option>
-          ))}
-        </select>
-      ) : field.type === "textarea" ? (
-        <textarea
-          {...register(`${field.id}`)}
-          className="input-field"
-          id={field.id}
-          placeholder={field.placeholder && field.placeholder}
-        ></textarea>
-      ) : null}
-      {errors[field.id] ? (
-        <p className="error">{errors[field.id]?.message}</p>
-      ) : null}
-    </div>
-  );
+            {field.options?.map((selectOption, index) => (
+              <option key={index} value={selectOption}>
+                {selectOption}
+              </option>
+            ))}
+          </select>
+          {errors[field.id] ? (
+            <p className="error">{errors[field.id]?.message}</p>
+          ) : null}
+        </div>
+      );
+
+    case "textarea":
+      return (
+        <div className="inputcontainer">
+          <label className="input-label" htmlFor={field.id}>
+            {field.label || field.id}
+          </label>
+          <textarea
+            {...register(field.id)}
+            className="input-field"
+            id={field.id}
+            placeholder={field.placeholder && field.placeholder}
+          />
+          {errors[field.id] ? (
+            <p className="error">{errors[field.id]?.message}</p>
+          ) : null}
+        </div>
+      );
+
+    default:
+      return (
+        <div className="inputcontainer">
+          <label className="input-label" htmlFor={field.id}>
+            {field.label || field.id}
+          </label>
+          <input
+            {...register(field.id)}
+            className="input-field"
+            id={field.id}
+            type={field.type}
+            placeholder={field.placeholder && field.placeholder}
+          />
+          {errors[field.id] ? (
+            <p className="error">{errors[field.id]?.message}</p>
+          ) : null}
+        </div>
+      );
+  }
 }
