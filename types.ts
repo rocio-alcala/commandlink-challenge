@@ -1,8 +1,8 @@
 export interface Field {
   id: string;
+  type: string;
+  label?: string;
   placeholder?: string;
   required?: boolean;
-  type: string;
-  options?: string []
+  options?: string[];
 }
-

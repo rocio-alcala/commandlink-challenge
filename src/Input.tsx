@@ -1,7 +1,6 @@
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import { Field } from "../types";
 import "./Input.css";
-import { capitalizeString } from "../helpers";
 interface InputProps {
   field: Field;
   register: UseFormRegister<FieldValues>;
@@ -15,9 +14,9 @@ export default function Input({ field, register, errors }: InputProps) {
   return (
     <div className="inputcontainer">
       <label className="input-label" htmlFor={field.id}>
-        {capitalizeString(field.id)}
+        {field.label || field.id}
       </label>
-      {field.type == "text" ? (
+      {field.type === "text" || field.type === "phone" || field.type === "email" ? (
         <input
           {...register(`${field.id}`)}
           className="input-field"

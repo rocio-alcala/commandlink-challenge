@@ -4,71 +4,65 @@ import fields from "../fields.json";
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from "./app/typehooks";
 import { submitForm } from "./app/formSlice";
-import { useState } from "react";
 import ThankYouPage from "./ThankYouPage";
 import * as yup from "yup";
 import { Field } from "../types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { capitalizeString } from "../helpers";
 
-const validationObjet: {
-  [key: string]: yup.StringSchema<string, yup.AnyObject, undefined, "">;
-} = {};
-
-fields.flat().forEach((field: Field) => {
-  let validationField: yup.StringSchema<string, yup.AnyObject, undefined, "">;
-  if (field.id === "email") {
-    validationField = yup.string().email(`${capitalizeString(field.id)} must be a valid email`) as yup.StringSchema<
-      string,
-      yup.AnyObject,
-      undefined,
-      ""
-    >;
-    if (field.required) {
-      validationField = validationField.required(`${capitalizeString(field.id)} is required`);
-    }
-    validationObjet[field.id] = validationField;
-  } else if (field.id === "phone") {
-    validationField = yup
-      .string()
-      .matches(
-        /^[0-9]{10}$/,
-        "The phone number must be 10 numeric digits"
-      ) as yup.StringSchema<string, yup.AnyObject, undefined, "">;
-    if (field.required) {
-      validationField = validationField.required(`${capitalizeString(field.id)} is required`);
-    }
-    validationObjet[field.id] = validationField;
-  } else if (field.required) {
-    validationField = yup.string().required(`${capitalizeString(field.id)} is required`);
-    validationObjet[field.id] = validationField;
+function getValidationSchema(field: Field) {
+  switch (field.type) {
+    case 'phone':
+      return yup
+        .string()
+        .matches(/^[0-9]{10}$/, "The phone number must be 10 numeric digits");
+    case 'email':
+      return yup
+        .string()
+        .email(`${field.label || field.id} must be a valid email`);
+    default:
+      return yup.string();
   }
-});
+}
 
-const formValidationSchema = yup.object().shape(validationObjet);
+function getValidationObject(fields: Field[]) {
+  const entries = fields.map((field) => {
+    const validationSchema = getValidationSchema(field);
+
+    if (field.required) {
+      validationSchema.required(`${field.label || field.id} is required`);
+    }
+
+    return [field.id, validationSchema];
+  });
+
+  return Object.fromEntries(entries);
+}
+
+const formValidationSchema = yup
+  .object()
+  .shape(getValidationObject(fields.flat()));
 
 function App() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitted },
   } = useForm({
     resolver: yupResolver(formValidationSchema),
   });
-  const [isSubmited, setIsSubmited] = useState(false);
+
   const dispatch = useAppDispatch();
 
   return (
     <>
-    <body>
       <nav>COMMAND LINK FORM</nav>
       <div className="container">
-        {!isSubmited ? (
+        {!isSubmitted ? (
           <>
             <form
               className="formcontainer"
               onSubmit={handleSubmit((formValues) => {
-                dispatch(submitForm(formValues)), setIsSubmited(true);
+                dispatch(submitForm(formValues));
               })}
             >
               {fields.map((field, index) => {
@@ -105,7 +99,6 @@ function App() {
           <ThankYouPage />
         )}
       </div>
-    </body>
     </>
   );
 }
