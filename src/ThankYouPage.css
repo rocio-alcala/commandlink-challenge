@@ -1,4 +1,8 @@
 .datainputrowcontainer {
+  border-width: 1px;
+  border-style: ridge;
+  margin: 7px;
+  border-radius: 3%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -6,9 +10,8 @@
 }
 
 .datainputcontainer {
+  margin: 20px;
   font-size: 30px;
-  padding: 40px;
-  font-family: "Gill Sans", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,25 +21,39 @@
 }
 
 .datainput {
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: 10px;
+  border-width: 1px;
+  border-style: dashed;
+  border-radius: 3%;
+  margin: 7px;
 }
 
 .displaydatacontainer {
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #d44127;
+  border-color: brown;
+  color: azure;
+  margin: 0 auto;
+  border-radius: 4%;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-items: center;
-  margin: 100px;
+  margin-top: 80px;
 }
 
 .title {
+  font-weight: bold;
   text-align: center;
+  padding: 30px;
+  margin: 0
 }
 
 @media screen and (max-width: 400px) {
   .datainputcontainer {
     font-size: 20px;
-    height: 300px;
   }
   .title {
     font-size: 30px;

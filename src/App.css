@@ -2,7 +2,6 @@
 nav {
   font-family: "Gill Sans", sans-serif;
   display: flex;
-  align-items: flex-end;
   justify-content: flex-start;
   background-color: black;
   color: white;
@@ -10,6 +9,8 @@ nav {
   font-weight: bolder;
   font-size: 30px;
 }
+
+.container { width: 100%;}
 
 .formcontainer {
   padding: 10px;
@@ -48,4 +49,10 @@ button {
 
 button:hover {
   background-color: #c23c25;
+}
+
+@media screen and (max-width: 400px) {
+  nav {
+    font-size: 20px;
+  }
 }

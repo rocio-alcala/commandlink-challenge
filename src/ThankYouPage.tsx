@@ -7,7 +7,7 @@ export default function ThankYouPage() {
 
   return (
     <div className="displaydatacontainer">
-      <h1 className="title">Thank you for submitted your information!!</h1>
+      <h1 className="title">Thank you! You had submitted this information...</h1>
       <div className="datainputcontainer">
         {fields.map((field, index) => {
           if (Array.isArray(field)) {
