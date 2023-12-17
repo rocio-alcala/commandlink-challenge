@@ -30,21 +30,25 @@
     [
       {
         "id": "city",
-        "type": "text"
+        "type": "text",
+        "label": "City"
       },
       {
         "id": "state",
-        "type": "text"
+        "type": "text",
+        "label": "State"
       },
       {
         "id": "zip",
-        "type": "text"
+        "type": "text",
+        "label": "Zip"
       }]
     ,
     {
       "id": "phone",
       "required": true,
-      "type": "phone"
+      "type": "phone",
+      "label": "Phone"
     },
     {
       "id": "jobTitle",
@@ -63,6 +67,8 @@
     {
       "id": "reason",
       "placeholder": "Describe why you are a good fit for the job you are applying for.",
-      "type": "textarea"
+      "type": "textarea",
+      "label": "Reason"
+      
     }
   ]
