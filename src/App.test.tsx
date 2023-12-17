@@ -5,6 +5,6 @@ import { renderWithProviders } from "./utils/test-utils";
 
 test("renders form header", () => {
   renderWithProviders(<App />);
-  const headerElement = screen.getByRole("heading");
-  expect(headerElement).toBeInTheDocument();
+  const headerImageElement = screen.getByRole("img");
+  expect(headerImageElement).toBeInTheDocument();
 });
