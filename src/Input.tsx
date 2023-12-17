@@ -14,7 +14,7 @@ export default function Input({ field, register, errors }: InputProps) {
       return (
         <div className="inputcontainer">
           <label className="input-label" htmlFor={field.id}>
-            {field.label || field.id}
+            {field.label || field.id}{field.required?<span>*</span>:null}
           </label>
           <select
             {...register(field.id)}
@@ -41,7 +41,7 @@ export default function Input({ field, register, errors }: InputProps) {
       return (
         <div className="inputcontainer">
           <label className="input-label" htmlFor={field.id}>
-            {field.label || field.id}
+            {field.label || field.id}{field.required?<span>*</span>:null}
           </label>
           <textarea
             {...register(field.id)}
@@ -59,7 +59,7 @@ export default function Input({ field, register, errors }: InputProps) {
       return (
         <div className="inputcontainer">
           <label className="input-label" htmlFor={field.id}>
-            {field.label || field.id}
+            {field.label || field.id}{field.required?<span>*</span>:null}
           </label>
           <input
             {...register(field.id)}
