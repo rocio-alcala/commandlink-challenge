@@ -2,8 +2,7 @@
 This is a small project application for a challenge given to me as part of the recruitment process. It is a dynamic form that allows you to render a form with the fields that are specified in a JSON file. This json file should be an array of field objects. The field objects that are related and need to be rendered inline should be inside an array.
 
 ## DATA STRUCTURE
-Structure of the field object:
-Should have the mandatory keys
+The structure of the field object should have the mandatory keys
 - id: string
 - type: "textarea", "select", "text"; any other will be rendered by default as "text," including the "email" and "phone" types.
 
