@@ -7,22 +7,25 @@ export default function ThankYouPage() {
 
   return (
     <div className="displaydatacontainer">
-      <h1 className="title">Thank you! You had submitted this information...</h1>
+      <h1 className="title">
+        Thank you! You had submitted this information...
+      </h1>
       <div className="datainputcontainer">
         {fields.map((field, index) => {
           if (Array.isArray(field)) {
-            return (
-              <div key={index} className="datainputrowcontainer">
-                {field.map((columField, index) => {
-                  if (storeForm[columField.id])
-                    return (
-                      <span className="datainput" key={index}>
-                        {storeForm[columField.id]}
-                      </span>
-                    );
-                })}
-              </div>
-            );
+            if (field.some((columField) => storeForm[columField.id]))
+              return (
+                <div key={index} className="datainputrowcontainer">
+                  {field.map((columField, index) => {
+                    if (storeForm[columField.id])
+                      return (
+                        <span className="datainput" key={index}>
+                          {storeForm[columField.id]}
+                        </span>
+                      );
+                  })}
+                </div>
+              );
           } else {
             if (storeForm[field.id])
               return (
