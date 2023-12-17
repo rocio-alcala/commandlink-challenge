@@ -57,7 +57,7 @@ function App() {
 
   return (
     <>
-      <nav>COMMAND LINK FORM</nav>
+      <nav><h1>COMMAND LINK FORM</h1></nav>
       <div className="container">
         {!isSubmitSuccessful ? (
           <form

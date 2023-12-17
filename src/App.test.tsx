@@ -3,8 +3,8 @@ import App from "./App";
 import "@testing-library/jest-dom";
 import { renderWithProviders } from "./utils/test-utils";
 
-test("renders learn react link", () => {
+test("renders form header", () => {
   renderWithProviders(<App />);
-  const linkElement = screen.getByText(/command link/i);
-  expect(linkElement).toBeInTheDocument();
+  const headerElement = screen.getByRole("heading");
+  expect(headerElement).toBeInTheDocument();
 });

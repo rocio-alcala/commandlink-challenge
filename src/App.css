@@ -5,8 +5,8 @@ nav {
   align-items: flex-end;
   justify-content: flex-start;
   background-color: black;
-  padding: 2rem;
   color: white;
+  padding-left: 4rem;
   font-weight: bolder;
   font-size: 30px;
 }
