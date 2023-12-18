@@ -1,16 +1,18 @@
-
 nav {
-  font-family: "Gill Sans", sans-serif;
   display: flex;
   justify-content: flex-start;
+ align-items: center;
   background-color: black;
   color: white;
   padding-left: 4rem;
-  font-weight: bolder;
-  font-size: 30px;
+  height: fit-content;
+  height: 70px;
 }
 
-.container { width: 100%;}
+.container {
+  width: 100%;
+  position: relative;
+}
 
 .formcontainer {
   padding: 10px;
@@ -40,15 +42,15 @@ button {
   margin: 20px;
   font-size: 16px;
   text-align: center;
-  background-color: #e6472b;
+  background-color: #1a1a1a;
   color: #fff;
-  border: 1px solid #d44127;
+  border: 1px solid #252424;
   border-radius: 5px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #c23c25;
+  background-color: #282828;
 }
 
 @media screen and (max-width: 400px) {

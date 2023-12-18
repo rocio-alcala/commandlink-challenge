@@ -8,6 +8,8 @@ import ThankYouPage from "./ThankYouPage";
 import * as yup from "yup";
 import { Field } from "../types";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
+
 
 function getValidationSchema(field: Field) {
   switch (field.type) {
@@ -48,57 +50,60 @@ function App() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(formValidationSchema),
   });
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useAppDispatch();
 
   return (
     <>
-      <nav><h1>COMMAND LINK FORM</h1></nav>
+      <nav>
+        <img
+          src="https://www.commandlink.com/wp-content/uploads/2021/12/CommandLink-Logo-White.png"
+          alt="commandLink"
+        ></img>
+      </nav>
       <div className="container">
-        {!isSubmitSuccessful ? (
-          <form
-            noValidate
-            className="formcontainer"
-            onSubmit={handleSubmit((formValues) =>
-              dispatch(submitForm(formValues))
-            )}
-          >
-            {fields.map((field, index) => {
-              if (Array.isArray(field)) {
-                return (
-                  <div key={index} className="rowcontainer">
-                    {field.map((columField, index) => {
-                      return (
-                        <Input
-                          errors={errors}
-                          register={register}
-                          field={columField}
-                          key={index}
-                        />
-                      );
-                    })}
-                  </div>
-                );
-              } else {
-                return (
-                  <Input
-                    errors={errors}
-                    register={register}
-                    field={field}
-                    key={index}
-                  />
-                );
-              }
-            })}
-            <button type="submit">Submit</button>
-          </form>
-        ) : (
-          <ThankYouPage />
-        )}
+        <form
+          noValidate
+          className="formcontainer"
+          onSubmit={handleSubmit((formValues) => {
+            dispatch(submitForm(formValues)), setIsModalOpen(true), reset();
+          })}
+        >
+          {fields.map((field, index) => {
+            if (Array.isArray(field)) {
+              return (
+                <div key={index} className="rowcontainer">
+                  {field.map((columField, index) => {
+                    return (
+                      <Input
+                        errors={errors}
+                        register={register}
+                        field={columField}
+                        key={index}
+                      />
+                    );
+                  })}
+                </div>
+              );
+            } else {
+              return (
+                <Input
+                  errors={errors}
+                  register={register}
+                  field={field}
+                  key={index}
+                />
+              );
+            }
+          })}
+          <button type="submit">Submit</button>
+        </form>
+        {isModalOpen ? <ThankYouPage setIsModalOpen={setIsModalOpen} /> : null}
       </div>
     </>
   );

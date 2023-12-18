@@ -2,7 +2,8 @@ import { useAppSelector } from "./app/typehooks";
 import fields from "../fields.json";
 import "./ThankYouPage.css";
 
-export default function ThankYouPage() {
+
+export default function ThankYouPage({ setIsModalOpen }) {
   const storeForm = useAppSelector((state) => state.form);
 
   return (
@@ -36,6 +37,7 @@ export default function ThankYouPage() {
           }
         })}
       </div>
+      <button onClick={() => setIsModalOpen(false)}>Close</button>
     </div>
   );
 }
